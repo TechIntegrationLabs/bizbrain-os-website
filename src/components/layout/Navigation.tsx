@@ -1,19 +1,24 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { MagneticButton } from '@/components/ui/MagneticButton';
 
 const navLinks = [
-  { label: 'Features', href: '#features' },
-  { label: 'How It Works', href: '#demo' },
-  { label: 'Course', href: '#course' },
+  { label: 'Features', href: '/features', homeAnchor: '#features' },
+  { label: 'Demos', href: '/demos', homeAnchor: '#demo' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Course', href: '/course' },
 ];
 
 export const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,8 +29,8 @@ export const Navigation: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollTo = (href: string) => {
-    const element = document.querySelector(href);
+  const scrollTo = (anchor: string) => {
+    const element = document.querySelector(anchor);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -45,35 +50,48 @@ export const Navigation: React.FC = () => {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <motion.a
-              href="/"
-              className="text-xl font-bold tracking-tighter"
-              whileHover={{ scale: 1.05 }}
-            >
-              BB<span className="text-cyan-400">OS</span>
-            </motion.a>
+            <Link href="/">
+              <motion.span
+                className="text-xl font-bold tracking-tighter cursor-pointer"
+                whileHover={{ scale: 1.05 }}
+              >
+                BB<span className="text-cyan-400">OS</span>
+              </motion.span>
+            </Link>
 
             {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <button
-                  key={link.label}
-                  onClick={() => scrollTo(link.href)}
-                  className="text-sm font-medium text-white/60 hover:text-white transition-colors"
-                >
-                  {link.label}
-                </button>
+                isHomePage && link.homeAnchor ? (
+                  <button
+                    key={link.label}
+                    onClick={() => scrollTo(link.homeAnchor!)}
+                    className="text-sm font-medium text-white/60 hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </button>
+                ) : (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="text-sm font-medium text-white/60 hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                )
               ))}
             </div>
 
             {/* CTA Button */}
             <div className="hidden md:block">
-              <MagneticButton
-                variant="secondary"
-                className="!px-4 !py-2 text-sm"
-              >
-                Get Started
-              </MagneticButton>
+              <Link href="/pricing">
+                <MagneticButton
+                  variant="secondary"
+                  className="!px-4 !py-2 text-sm"
+                >
+                  Get Started
+                </MagneticButton>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -99,18 +117,31 @@ export const Navigation: React.FC = () => {
             <div className="container mx-auto px-6 py-8">
               <div className="flex flex-col gap-6">
                 {navLinks.map((link) => (
-                  <button
-                    key={link.label}
-                    onClick={() => scrollTo(link.href)}
-                    className="text-2xl font-medium text-white/80 hover:text-white text-left"
-                  >
-                    {link.label}
-                  </button>
+                  isHomePage && link.homeAnchor ? (
+                    <button
+                      key={link.label}
+                      onClick={() => scrollTo(link.homeAnchor!)}
+                      className="text-2xl font-medium text-white/80 hover:text-white text-left"
+                    >
+                      {link.label}
+                    </button>
+                  ) : (
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="text-2xl font-medium text-white/80 hover:text-white text-left"
+                    >
+                      {link.label}
+                    </Link>
+                  )
                 ))}
                 <div className="pt-6 border-t border-white/10">
-                  <MagneticButton className="w-full justify-center">
-                    Get Started
-                  </MagneticButton>
+                  <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)}>
+                    <MagneticButton className="w-full justify-center">
+                      Get Started
+                    </MagneticButton>
+                  </Link>
                 </div>
               </div>
             </div>

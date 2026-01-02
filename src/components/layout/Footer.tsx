@@ -1,21 +1,22 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Twitter, Youtube, MessageCircle } from 'lucide-react';
 
 const footerLinks = {
   product: [
-    { label: 'Features', href: '#features' },
-    { label: 'How It Works', href: '#demo' },
-    { label: 'Pricing', href: '#course' },
+    { label: 'Features', href: '/features' },
+    { label: 'Demos', href: '/demos' },
+    { label: 'Pricing', href: '/pricing' },
   ],
   resources: [
-    { label: 'Documentation', href: '#' },
-    { label: 'Course', href: '#course' },
+    { label: 'Course', href: '/course' },
+    { label: 'Documentation', href: '/course' },
     { label: 'Community', href: '#' },
   ],
   company: [
-    { label: 'About', href: '#' },
+    { label: 'About', href: '/about' },
     { label: 'Blog', href: '#' },
     { label: 'Contact', href: '#' },
   ],
@@ -34,9 +35,9 @@ export const Footer: React.FC = () => {
         <div className="grid md:grid-cols-5 gap-8 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <a href="/" className="text-2xl font-bold tracking-tighter mb-4 block">
+            <Link href="/" className="text-2xl font-bold tracking-tighter mb-4 block">
               BB<span className="text-cyan-400">OS</span>
-            </a>
+            </Link>
             <p className="text-white/40 text-sm mb-6 max-w-xs">
               Your business, finally organized. Built with Claude Code. Powered by context.
             </p>
@@ -60,12 +61,18 @@ export const Footer: React.FC = () => {
             <ul className="space-y-3">
               {footerLinks.product.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-white/40 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </a>
+                  {link.href.startsWith('/') ? (
+                    <Link
+                      href={link.href}
+                      className="text-sm text-white/40 hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <span className="text-sm text-white/20 cursor-not-allowed">
+                      {link.label}
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -76,12 +83,18 @@ export const Footer: React.FC = () => {
             <ul className="space-y-3">
               {footerLinks.resources.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-white/40 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </a>
+                  {link.href.startsWith('/') ? (
+                    <Link
+                      href={link.href}
+                      className="text-sm text-white/40 hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <span className="text-sm text-white/20 cursor-not-allowed">
+                      {link.label}
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -92,12 +105,18 @@ export const Footer: React.FC = () => {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-white/40 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </a>
+                  {link.href.startsWith('/') ? (
+                    <Link
+                      href={link.href}
+                      className="text-sm text-white/40 hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <span className="text-sm text-white/20 cursor-not-allowed">
+                      {link.label}
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
