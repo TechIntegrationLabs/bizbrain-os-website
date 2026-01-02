@@ -14,6 +14,8 @@ import {
   Grid3X3,
   List,
   ArrowLeft,
+  FileText,
+  GitBranch,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -23,6 +25,8 @@ import { ContextGraph } from '@/components/demos/ContextGraph';
 import { EntityDashboard } from '@/components/demos/EntityDashboard';
 import { TimeTracker } from '@/components/demos/TimeTracker';
 import { MCPPanel } from '@/components/demos/MCPPanel';
+import { DocumentGenerator } from '@/components/demos/DocumentGenerator';
+import { VersionTimeline } from '@/components/demos/VersionTimeline';
 
 import { staggerContainer, staggerItem } from '@/lib/animations';
 import { cn } from '@/lib/utils';
@@ -91,6 +95,24 @@ const demos: Demo[] = [
     color: '#a855f7',
     component: <MCPPanel />,
     tags: ['Integrations', 'Tools', 'API'],
+  },
+  {
+    id: 'docs',
+    name: 'Document Generator',
+    description: 'Create professional documents with live preview',
+    icon: FileText,
+    color: '#f97316',
+    component: <DocumentGenerator />,
+    tags: ['Templates', 'PDF', 'Markdown'],
+  },
+  {
+    id: 'versions',
+    name: 'Version Timeline',
+    description: 'Browse git history with visual diff and rollback',
+    icon: GitBranch,
+    color: '#14b8a6',
+    component: <VersionTimeline />,
+    tags: ['Git', 'History', 'Snapshots'],
   },
 ];
 
