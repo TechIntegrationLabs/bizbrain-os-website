@@ -225,6 +225,7 @@ export const ContextGraph: React.FC<ContextGraphProps> = ({ className }) => {
       .data(filteredNodes)
       .join('g')
       .attr('cursor', 'pointer')
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .call(
         d3.drag<SVGGElement, GraphNode>()
           .on('start', (event, d) => {
@@ -240,7 +241,7 @@ export const ContextGraph: React.FC<ContextGraphProps> = ({ className }) => {
             if (!event.active) simulation.alphaTarget(0);
             d.fx = null;
             d.fy = null;
-          })
+          }) as any
       );
 
     // Add circles to nodes
@@ -304,7 +305,7 @@ export const ContextGraph: React.FC<ContextGraphProps> = ({ className }) => {
         .strength(0.5))
       .force('charge', d3.forceManyBody().strength(-200))
       .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius((d: GraphNode) => 20 + (d.connections || 0) * 1.5));
+      .force('collision', d3.forceCollide<GraphNode>().radius((d) => 20 + (d.connections || 0) * 1.5));
 
     simulationRef.current = simulation;
 

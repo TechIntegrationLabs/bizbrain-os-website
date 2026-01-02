@@ -331,7 +331,6 @@ System infrastructure and tooling.
           },
           activeFile: 'CLAUDE.md',
         },
-        duration: 20,
         content: `
 # Initial Configuration
 

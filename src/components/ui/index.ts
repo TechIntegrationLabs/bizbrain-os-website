@@ -5,7 +5,8 @@ export { GlassCard } from './GlassCard';
 export { MagneticButton } from './MagneticButton';
 export { CommandPalette } from './CommandPalette';
 export { AnimatedCounter } from './AnimatedCounter';
-export { FAQAccordion, FAQItem } from './FAQAccordion';
+export { FAQAccordion } from './FAQAccordion';
+export type { FAQItem } from './FAQAccordion';
 export { PricingTable, default as PricingTableDefault } from './PricingTable';
 export {
   TestimonialCarousel,

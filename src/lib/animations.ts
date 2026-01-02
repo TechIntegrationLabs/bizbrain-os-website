@@ -274,6 +274,10 @@ export const hoverGlow = {
 // ============================================
 // SCROLL REVEAL VARIANTS
 // ============================================
+
+// Viewport config for scroll reveal animations (use as prop, not in variants)
+export const revealViewport = { once: true, margin: '-100px' as const };
+
 export const revealFromBottom: Variants = {
   initial: { opacity: 0, y: 80 },
   whileInView: {
@@ -281,7 +285,6 @@ export const revealFromBottom: Variants = {
     y: 0,
     transition: { duration: duration.slow, ease: easing.apple },
   },
-  viewport: { once: true, margin: '-100px' },
 };
 
 export const revealFromLeft: Variants = {
@@ -291,7 +294,6 @@ export const revealFromLeft: Variants = {
     x: 0,
     transition: { duration: duration.slow, ease: easing.apple },
   },
-  viewport: { once: true, margin: '-100px' },
 };
 
 export const revealFromRight: Variants = {
@@ -301,7 +303,6 @@ export const revealFromRight: Variants = {
     x: 0,
     transition: { duration: duration.slow, ease: easing.apple },
   },
-  viewport: { once: true, margin: '-100px' },
 };
 
 // ============================================
