@@ -49,8 +49,8 @@ export function FinalCTA() {
     <section className="py-24 relative overflow-hidden">
       {/* Gradient background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-t from-cyan-950/30 via-surface to-transparent" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-cyan-500/10 blur-[120px] rounded-full" />
+        <div className="absolute inset-0 bg-gradient-to-t from-teal-950/30 via-surface to-transparent" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-teal-500/10 blur-[120px] rounded-full" />
       </div>
 
       {/* Floating particles */}
@@ -58,7 +58,7 @@ export function FinalCTA() {
         {Array.from({ length: 20 }).map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-cyan-400/30 rounded-full"
+            className="absolute w-1 h-1 bg-teal-400/30 rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -84,9 +84,9 @@ export function FinalCTA() {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto"
         >
-          <div className="relative rounded-3xl border border-white/10 bg-gradient-to-br from-surface via-surface to-cyan-950/20 p-8 md:p-12 overflow-hidden">
+          <div className="relative rounded-3xl border border-white/10 bg-gradient-to-br from-surface via-surface to-teal-950/20 p-8 md:p-12 overflow-hidden">
             {/* Decorative elements */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 blur-3xl rounded-full" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/5 blur-3xl rounded-full" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-emerald-500/5 blur-3xl rounded-full" />
 
             {/* Content */}
@@ -111,7 +111,7 @@ export function FinalCTA() {
                 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
               >
                 Ready to Build Your{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400">
                   Business Brain?
                 </span>
               </motion.h2>
@@ -154,8 +154,8 @@ export function FinalCTA() {
                   href="/course"
                   className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-white overflow-hidden transition-all hover:scale-105"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-emerald-500" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-teal-500 to-emerald-500" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-teal-600 to-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                   <span className="relative flex items-center gap-2">
                     Get the Course
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -217,7 +217,7 @@ export function FinalCTA() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-cyan-500/50 transition-colors"
+                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-teal-500/50 transition-colors"
                   required
                 />
               </div>
@@ -227,8 +227,8 @@ export function FinalCTA() {
                 className={cn(
                   'px-6 py-3 rounded-xl font-medium transition-all',
                   isSubmitting
-                    ? 'bg-cyan-500/50 text-white/50 cursor-wait'
-                    : 'bg-cyan-500 text-white hover:bg-cyan-600'
+                    ? 'bg-teal-500/50 text-white/50 cursor-wait'
+                    : 'bg-teal-500 text-white hover:bg-teal-600'
                 )}
               >
                 {isSubmitting ? 'Sending...' : 'Get Guide'}

@@ -17,7 +17,7 @@ import {
   TrendingUp,
   Users,
 } from 'lucide-react';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { GlassPanel } from '@/components/ui/GlassPanel';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 import { cn } from '@/lib/utils';
 import { spring, staggerContainer, staggerItem, scaleIn } from '@/lib/animations';
@@ -31,7 +31,7 @@ const painPoints = [
       'Important decisions buried in Slack. Client preferences lost in email threads. Every new conversation starts from zero.',
     stat: '67%',
     statLabel: 'of context lost daily',
-    color: 'cyan',
+    color: 'teal',
   },
   {
     icon: Cog,
@@ -58,7 +58,7 @@ const painPoints = [
       'Explaining the same project context over and over. New team members take weeks to get up to speed.',
     stat: '3x',
     statLabel: 'longer onboarding',
-    color: 'cyan',
+    color: 'teal',
   },
   {
     icon: Clock,
@@ -124,7 +124,7 @@ const PainPointCard: React.FC<{
   onClick: () => void;
 }> = ({ point, index, isActive, onClick }) => {
   const colorClasses = {
-    cyan: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
+    teal: 'text-teal-400 bg-teal-500/10 border-teal-500/20',
     emerald: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
     amber: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
   };
@@ -139,10 +139,10 @@ const PainPointCard: React.FC<{
       onClick={onClick}
       className={cn(
         'cursor-pointer transition-all duration-300',
-        isActive && 'ring-2 ring-cyan-500/50'
+        isActive && 'ring-2 ring-neural-teal/50'
       )}
     >
-      <GlassCard className="h-full">
+      <GlassPanel variant="interactive" glow={point.color === 'teal' ? 'teal' : point.color === 'emerald' ? 'emerald' : 'amber'} className="h-full">
         <div className="flex flex-col h-full">
           <div className="flex items-start justify-between mb-4">
             <div
@@ -165,7 +165,7 @@ const PainPointCard: React.FC<{
             {point.description}
           </p>
         </div>
-      </GlassCard>
+      </GlassPanel>
     </motion.div>
   );
 };
@@ -228,15 +228,15 @@ const ComparisonSlider: React.FC = () => {
 
       {/* After Side (overlaid) */}
       <div
-        className="absolute inset-0 bg-gradient-to-br from-cyan-950/30 to-surface"
+        className="absolute inset-0 bg-gradient-to-br from-teal-950/30 to-surface"
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
         <div className="p-6 md:p-8">
           <div className="flex items-center gap-2 mb-6">
-            <div className="w-8 h-8 rounded-full bg-cyan-500/20 flex items-center justify-center">
-              <Check className="w-4 h-4 text-cyan-400" />
+            <div className="w-8 h-8 rounded-full bg-teal-500/20 flex items-center justify-center">
+              <Check className="w-4 h-4 text-teal-400" />
             </div>
-            <span className="text-cyan-400 font-semibold">After</span>
+            <span className="text-teal-400 font-semibold">After</span>
           </div>
           <div className="space-y-3">
             {comparisonItems.map((item, i) => (
@@ -247,7 +247,7 @@ const ComparisonSlider: React.FC = () => {
                 transition={{ delay: i * 0.1 }}
                 className="flex items-start gap-3 text-sm text-white/80"
               >
-                <Check className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
+                <Check className="w-4 h-4 text-teal-400 mt-0.5 flex-shrink-0" />
                 <span>{item.after}</span>
               </motion.div>
             ))}
@@ -298,9 +298,9 @@ const StatsSection: React.FC<{ isInView: boolean }> = ({ isInView }) => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: index * 0.1 }}
         >
-          <GlassCard className="text-center py-6">
-            <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-cyan-500/10 flex items-center justify-center">
-              <stat.icon className="w-6 h-6 text-cyan-400" />
+          <GlassPanel className="text-center py-6">
+            <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-teal-500/10 flex items-center justify-center">
+              <stat.icon className="w-6 h-6 text-teal-400" />
             </div>
             <div className="text-3xl md:text-4xl font-bold text-white mb-2">
               <AnimatedCounter
@@ -312,7 +312,7 @@ const StatsSection: React.FC<{ isInView: boolean }> = ({ isInView }) => {
               />
             </div>
             <div className="text-sm text-white/60">{stat.label}</div>
-          </GlassCard>
+          </GlassPanel>
         </motion.div>
       ))}
     </div>
@@ -329,7 +329,7 @@ export const ProblemSolution: React.FC = () => {
     <section ref={ref} className="py-24 md:py-32 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-grid opacity-30" />
-      <div className="absolute top-1/4 -left-32 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/4 -left-32 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 -right-32 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-6 relative z-10">
@@ -391,7 +391,7 @@ export const ProblemSolution: React.FC = () => {
           transition={{ delay: 0.5 }}
           className="flex justify-center mb-24"
         >
-          <div className="w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500 to-emerald-500 flex items-center justify-center">
+          <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 flex items-center justify-center">
             <ArrowRight className="w-8 h-8 text-white" />
           </div>
         </motion.div>
@@ -403,13 +403,13 @@ export const ProblemSolution: React.FC = () => {
           transition={{ delay: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-sm mb-6">
             <Zap className="w-4 h-4" />
             The Solution
           </div>
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
             One{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400">
               Business Brain
             </span>
           </h2>
@@ -430,7 +430,7 @@ export const ProblemSolution: React.FC = () => {
           <h3 className="text-center text-xl md:text-2xl font-semibold mb-8">
             Drag to compare:{' '}
             <span className="text-white/40">Before</span> vs{' '}
-            <span className="text-cyan-400">After</span>
+            <span className="text-teal-400">After</span>
           </h3>
           <ComparisonSlider />
         </motion.div>

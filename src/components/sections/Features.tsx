@@ -3,7 +3,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Download, Globe, Users, BarChart3, Search, Zap } from 'lucide-react';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { GlassPanel } from '@/components/ui/GlassPanel';
 import { staggerContainer, staggerItem } from '@/lib/utils';
 
 const features = [
@@ -12,7 +12,7 @@ const features = [
     title: "Drop Anything, Get Structure",
     description: "Voice notes, PDFs, emails, screenshots - throw it all in. The system analyzes, extracts, and routes automatically.",
     command: "/intake",
-    color: "from-cyan-500 to-cyan-600"
+    color: "from-teal-500 to-teal-600"
   },
   {
     icon: Globe,
@@ -91,7 +91,7 @@ export const Features: React.FC = () => {
         >
           {features.map((feature, index) => (
             <motion.div key={index} variants={staggerItem}>
-              <GlassCard className="h-full group">
+              <GlassPanel className="h-full group">
                 <div className="flex flex-col h-full">
                   {/* Icon */}
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
@@ -106,12 +106,12 @@ export const Features: React.FC = () => {
 
                   {/* Command */}
                   <div className="flex items-center gap-2">
-                    <code className="text-xs font-mono bg-white/5 px-2 py-1 rounded text-cyan-400">
+                    <code className="text-xs font-mono bg-white/5 px-2 py-1 rounded text-teal-400">
                       {feature.command}
                     </code>
                   </div>
                 </div>
-              </GlassCard>
+              </GlassPanel>
             </motion.div>
           ))}
         </motion.div>

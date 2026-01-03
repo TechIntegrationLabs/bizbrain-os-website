@@ -84,7 +84,7 @@ const stats: Stat[] = [
     suffix: '%',
     label: 'Time Saved on Admin',
     icon: Clock,
-    color: '#06b6d4',
+    color: '#2dd4bf',
   },
   {
     value: 23,
@@ -182,7 +182,7 @@ export function SocialProof() {
             className="text-4xl md:text-5xl font-bold text-white mb-6"
           >
             Real Results,{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
               Real People
             </span>
           </motion.h2>
@@ -214,7 +214,7 @@ export function SocialProof() {
               className="group relative rounded-2xl border border-white/10 bg-surface/50 p-6 hover:border-white/20 transition-all"
             >
               {/* Quote icon */}
-              <Quote className="absolute top-6 right-6 w-8 h-8 text-white/5 group-hover:text-cyan-500/20 transition-colors" />
+              <Quote className="absolute top-6 right-6 w-8 h-8 text-white/5 group-hover:text-teal-500/20 transition-colors" />
 
               {/* Rating */}
               <div className="flex gap-1 mb-4">
@@ -229,14 +229,14 @@ export function SocialProof() {
               </p>
 
               {/* Highlight badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-sm mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 text-teal-400 text-sm mb-6">
                 <TrendingUp className="w-3 h-3" />
                 {testimonial.highlight}
               </div>
 
               {/* Author */}
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center text-white font-semibold text-sm">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center text-white font-semibold text-sm">
                   {testimonial.avatar}
                 </div>
                 <div>

@@ -3,7 +3,7 @@
 import React, { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Check, ChevronDown, Play, Clock, BookOpen, Users } from 'lucide-react';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { GlassPanel } from '@/components/ui/GlassPanel';
 import { MagneticButton } from '@/components/ui/MagneticButton';
 import { staggerContainer, staggerItem } from '@/lib/utils';
 
@@ -67,7 +67,7 @@ const ModuleCard: React.FC<ModuleCardProps> = ({ module, isOpen, onClick }) => {
         className="w-full p-4 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
       >
         <div className="flex items-center gap-4">
-          <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center text-sm font-bold">
+          <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center text-sm font-bold">
             {module.number}
           </span>
           <span className="font-medium">{module.title}</span>
@@ -93,7 +93,7 @@ const ModuleCard: React.FC<ModuleCardProps> = ({ module, isOpen, onClick }) => {
               <div className="border-t border-white/10 pt-4">
                 {module.lessons.map((lesson, index) => (
                   <div key={index} className="flex items-center gap-3 py-2 text-sm text-white/60">
-                    <Play className="w-3 h-3 text-cyan-400" />
+                    <Play className="w-3 h-3 text-teal-400" />
                     <span>{lesson}</span>
                   </div>
                 ))}
@@ -141,7 +141,7 @@ export const Course: React.FC = () => {
             className="flex flex-wrap justify-center gap-8 mb-12"
           >
             <div className="flex items-center gap-2 text-white/60">
-              <BookOpen className="w-5 h-5 text-cyan-400" />
+              <BookOpen className="w-5 h-5 text-teal-400" />
               <span>8 Modules</span>
             </div>
             <div className="flex items-center gap-2 text-white/60">
@@ -179,9 +179,9 @@ export const Course: React.FC = () => {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
             transition={{ delay: 0.5 }}
           >
-            <GlassCard className="sticky top-8">
+            <GlassPanel className="sticky top-8">
               <div className="text-center mb-8">
-                <div className="text-sm text-cyan-400 font-medium mb-2">Early Access Pricing</div>
+                <div className="text-sm text-teal-400 font-medium mb-2">Early Access Pricing</div>
                 <div className="flex items-center justify-center gap-3 mb-2">
                   <span className="text-5xl font-bold">$197</span>
                   <span className="text-xl text-white/40 line-through">$397</span>
@@ -213,7 +213,7 @@ export const Course: React.FC = () => {
               <p className="text-center text-sm text-white/40 mt-4">
                 30-day money-back guarantee
               </p>
-            </GlassCard>
+            </GlassPanel>
           </motion.div>
         </div>
       </div>

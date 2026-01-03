@@ -15,7 +15,7 @@ export const CTA: React.FC = () => {
       <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-20 blur-3xl"
         style={{
-          background: 'conic-gradient(from 0deg, #06b6d4, #10b981, #f59e0b, #06b6d4)'
+          background: 'conic-gradient(from 0deg, #2dd4bf, #10b981, #f59e0b, #2dd4bf)'
         }}
         animate={{
           rotate: 360

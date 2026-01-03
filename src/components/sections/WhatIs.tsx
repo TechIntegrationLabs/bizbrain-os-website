@@ -51,8 +51,8 @@ export const WhatIs: React.FC = () => {
                   transition={{ delay: 0.5 + index * 0.1 }}
                   className="flex items-start gap-4"
                 >
-                  <span className="w-6 h-6 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                  <span className="w-6 h-6 rounded-full bg-teal-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="w-2 h-2 rounded-full bg-teal-400" />
                   </span>
                   <span className="text-white/70">{cap}</span>
                 </motion.li>
@@ -70,7 +70,7 @@ export const WhatIs: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               className="glass-panel rounded-xl p-4 flex items-center gap-3"
             >
-              <Mic className="w-5 h-5 text-cyan-400" />
+              <Mic className="w-5 h-5 text-teal-400" />
               <span className="text-sm">Voice Note</span>
             </motion.div>
 
@@ -79,9 +79,9 @@ export const WhatIs: React.FC = () => {
             {/* Brain */}
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="glass-panel-strong rounded-xl p-6 flex items-center gap-3 border-cyan-500/30"
+              className="glass-panel-strong rounded-xl p-6 flex items-center gap-3 border-teal-500/30"
             >
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center">
                 <span className="text-lg font-bold">BB</span>
               </div>
               <span className="font-semibold">Business Brain</span>
@@ -109,7 +109,7 @@ export const WhatIs: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 className="glass-panel rounded-lg px-3 py-2 flex items-center gap-2 text-sm"
               >
-                <FolderOpen className="w-4 h-4 text-cyan-400" />
+                <FolderOpen className="w-4 h-4 text-teal-400" />
                 <span>Context Built</span>
               </motion.div>
             </div>

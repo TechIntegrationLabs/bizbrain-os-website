@@ -3,7 +3,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Brain, Cog, Smartphone } from 'lucide-react';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { GlassPanel } from '@/components/ui/GlassPanel';
 import { staggerContainer, staggerItem } from '@/lib/utils';
 
 const problems = [
@@ -11,7 +11,7 @@ const problems = [
     icon: Brain,
     title: "Context Dies in Conversations",
     description: "Important decisions buried in Slack. Client preferences lost in email threads. Every new conversation starts from zero.",
-    color: "text-cyan-400"
+    color: "text-teal-400"
   },
   {
     icon: Cog,
@@ -68,7 +68,7 @@ export const Problem: React.FC = () => {
         >
           {problems.map((problem, index) => (
             <motion.div key={index} variants={staggerItem}>
-              <GlassCard className="h-full">
+              <GlassPanel className="h-full">
                 <div className="flex flex-col h-full">
                   <div className={`w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-4 ${problem.color}`}>
                     <problem.icon className="w-6 h-6" />
@@ -76,7 +76,7 @@ export const Problem: React.FC = () => {
                   <h3 className="text-xl font-semibold mb-3">{problem.title}</h3>
                   <p className="text-white/60 text-sm leading-relaxed">{problem.description}</p>
                 </div>
-              </GlassCard>
+              </GlassPanel>
             </motion.div>
           ))}
         </motion.div>

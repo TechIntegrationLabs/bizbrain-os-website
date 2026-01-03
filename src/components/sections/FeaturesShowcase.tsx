@@ -53,7 +53,7 @@ const features: Feature[] = [
     shortDesc: 'Drop voice notes, get structured context',
     longDesc: 'Transcribe voice notes automatically and extract actionable context - todos, decisions, mentions, and more.',
     icon: Mic,
-    color: '#06b6d4',
+    color: '#2dd4bf',
     category: 'core',
     demoId: 'intake',
     highlights: ['Auto-transcription', 'Entity extraction', 'Smart routing'],
@@ -181,7 +181,7 @@ const features: Feature[] = [
     shortDesc: '25+ powerful commands at your fingertips',
     longDesc: 'From /intake to /snapshot to /brief - every operation is a simple command away.',
     icon: Terminal,
-    color: '#06b6d4',
+    color: '#2dd4bf',
     category: 'core',
     demoId: 'terminal',
     highlights: ['25+ commands', 'Tab completion', 'Custom commands'],
@@ -273,7 +273,7 @@ const features: Feature[] = [
     shortDesc: 'Built for Claude from the ground up',
     longDesc: 'Every folder structure, file format, and convention optimized for AI-assisted operations.',
     icon: Sparkles,
-    color: '#06b6d4',
+    color: '#2dd4bf',
     category: 'core',
     highlights: ['CLAUDE.md everywhere', 'Context-optimized', 'AI-first'],
   },
@@ -299,7 +299,7 @@ export function FeaturesShowcase() {
   return (
     <section className="py-24 relative overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-950/10 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-teal-950/10 to-transparent pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
@@ -308,10 +308,10 @@ export function FeaturesShowcase() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/20 mb-6"
           >
-            <Sparkles className="w-4 h-4 text-cyan-400" />
-            <span className="text-sm text-cyan-400 font-medium">22 Integrated Features</span>
+            <Sparkles className="w-4 h-4 text-teal-400" />
+            <span className="text-sm text-teal-400 font-medium">22 Integrated Features</span>
           </motion.div>
 
           <motion.h2
@@ -322,7 +322,7 @@ export function FeaturesShowcase() {
             className="text-4xl md:text-5xl font-bold text-white mb-6"
           >
             Everything You Need,{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400">
               Nothing You Don&apos;t
             </span>
           </motion.h2>
@@ -353,7 +353,7 @@ export function FeaturesShowcase() {
               className={cn(
                 'px-4 py-2 rounded-full text-sm font-medium transition-all',
                 selectedCategory === cat.id
-                  ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/25'
+                  ? 'bg-teal-500 text-white shadow-lg shadow-teal-500/25'
                   : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white'
               )}
             >
@@ -439,7 +439,7 @@ export function FeaturesShowcase() {
                     </div>
 
                     {/* Content */}
-                    <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-cyan-400 transition-colors">
+                    <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-teal-400 transition-colors">
                       {feature.name}
                     </h3>
                     <p className="text-sm text-white/60 mb-3">
@@ -475,7 +475,7 @@ export function FeaturesShowcase() {
                               <Link
                                 href={`/demos?demo=${feature.demoId}`}
                                 onClick={(e) => e.stopPropagation()}
-                                className="flex items-center gap-2 text-cyan-400 text-sm hover:text-cyan-300 transition-colors"
+                                className="flex items-center gap-2 text-teal-400 text-sm hover:text-teal-300 transition-colors"
                               >
                                 View Interactive Demo
                                 <ArrowRight className="w-4 h-4" />
@@ -501,7 +501,7 @@ export function FeaturesShowcase() {
         >
           <Link
             href="/demos"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-medium hover:shadow-lg hover:shadow-cyan-500/25 transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-medium hover:shadow-lg hover:shadow-teal-500/25 transition-all"
           >
             Explore All Demos
             <ArrowRight className="w-4 h-4" />
