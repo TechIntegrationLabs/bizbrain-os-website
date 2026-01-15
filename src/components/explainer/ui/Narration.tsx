@@ -1,6 +1,17 @@
 'use client';
 
+import React from 'react';
 import { create } from 'zustand';
+
+// Import pre-generated audio manifest
+import audioManifest from '../../../../public/audio/narrations/manifest.json';
+
+// Type for manifest entries
+interface ManifestEntry {
+  id: string;
+  file: string;
+  text: string;
+}
 
 // Store for managing narration state
 interface NarrationStore {
@@ -21,30 +32,29 @@ export const useNarrationStore = create<NarrationStore>((set) => ({
   toggleAudio: () => set((state) => ({ audioEnabled: !state.audioEnabled })),
 }));
 
-// Audio context singleton
-let audioContext: AudioContext | null = null;
-let currentSource: AudioBufferSourceNode | null = null;
+// Current audio element for HTML5 audio playback
+let currentAudio: HTMLAudioElement | null = null;
 let speechSynthesisUtterance: SpeechSynthesisUtterance | null = null;
 
-// Initialize audio context
-const getAudioContext = (): AudioContext | null => {
-  if (typeof window === 'undefined') return null;
+// Hash text to match manifest lookup (same algorithm as generation script)
+const hashText = (text: string): string => {
+  // Simple hash function that matches the MD5 algorithm output
+  // We'll use a direct lookup instead since we have the full text in manifest
+  return '';
+};
 
-  if (!audioContext) {
-    try {
-      audioContext = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
-    } catch {
-      console.warn('Web Audio API not supported');
-      return null;
+// Find audio file in manifest by matching text
+const findAudioFile = (text: string): string | null => {
+  const manifest = audioManifest as Record<string, ManifestEntry>;
+
+  // Search through manifest for matching text
+  for (const key of Object.keys(manifest)) {
+    if (manifest[key].text === text) {
+      return manifest[key].file;
     }
   }
 
-  // Resume if suspended (required by browsers)
-  if (audioContext.state === 'suspended') {
-    audioContext.resume();
-  }
-
-  return audioContext;
+  return null;
 };
 
 // Stop any current narration
@@ -52,14 +62,11 @@ export const stopNarration = () => {
   const store = useNarrationStore.getState();
   store.setPlaying(false);
 
-  // Stop Web Audio
-  if (currentSource) {
-    try {
-      currentSource.stop();
-    } catch {
-      // Ignore already stopped error
-    }
-    currentSource = null;
+  // Stop HTML5 Audio
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    currentAudio = null;
   }
 
   // Stop Speech Synthesis
@@ -70,7 +77,34 @@ export const stopNarration = () => {
   speechSynthesisUtterance = null;
 };
 
-// Play narration using browser Speech Synthesis (fallback, always available)
+// Play pre-generated ElevenLabs audio
+const playElevenLabsAudio = async (audioPath: string): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    if (typeof window === 'undefined') {
+      reject(new Error('Window not available'));
+      return;
+    }
+
+    const audio = new Audio(audioPath);
+    currentAudio = audio;
+
+    audio.onended = () => {
+      useNarrationStore.getState().setPlaying(false);
+      currentAudio = null;
+      resolve();
+    };
+
+    audio.onerror = (e) => {
+      useNarrationStore.getState().setPlaying(false);
+      currentAudio = null;
+      reject(e);
+    };
+
+    audio.play().catch(reject);
+  });
+};
+
+// Play narration using browser Speech Synthesis (fallback)
 const playBrowserTTS = async (text: string): Promise<void> => {
   return new Promise((resolve, reject) => {
     if (typeof window === 'undefined' || !window.speechSynthesis) {
@@ -128,7 +162,20 @@ export const playNarration = async (text: string): Promise<void> => {
 
   store.setPlaying(true);
 
-  // For now, use browser TTS (can be enhanced with Google AI later)
+  // Try to find pre-generated audio first
+  const audioFile = findAudioFile(text);
+
+  if (audioFile) {
+    try {
+      // Play ElevenLabs pre-generated audio
+      await playElevenLabsAudio(audioFile);
+      return;
+    } catch (error) {
+      console.warn('ElevenLabs audio playback failed, falling back to TTS:', error);
+    }
+  }
+
+  // Fallback to browser TTS if no pre-generated audio found
   try {
     await playBrowserTTS(text);
   } catch (error) {
@@ -181,6 +228,3 @@ export const NarrationControls: React.FC<{ className?: string }> = ({ className 
     </div>
   );
 };
-
-// Import React for the component
-import React from 'react';

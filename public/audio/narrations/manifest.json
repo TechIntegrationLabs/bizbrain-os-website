@@ -1,0 +1,107 @@
+{
+  "1a123007fd47": {
+    "id": "intro-1",
+    "file": "/audio/narrations/intro-1.mp3",
+    "text": "Welcome. Quick question: How many of you have actually used AI for your business?"
+  },
+  "e354cbb3d0ae": {
+    "id": "intro-2",
+    "file": "/audio/narrations/intro-2.mp3",
+    "text": "And be honest... did it feel generic? Like it didn't really know who you are?"
+  },
+  "0af87afd5f96": {
+    "id": "intro-3",
+    "file": "/audio/narrations/intro-3.mp3",
+    "text": "Exactly. There is a reason for that gap. Let me show you."
+  },
+  "93cb07d740e9": {
+    "id": "problem-1",
+    "file": "/audio/narrations/problem-1.mp3",
+    "text": "Here is the problem. Even the smartest AI is blind to your daily operations. Click the sources to see what it's missing."
+  },
+  "252585f9d8d1": {
+    "id": "problem-2",
+    "file": "/audio/narrations/problem-2.mp3",
+    "text": "Without this data, it's just a generalist. But if we bridge this gap... everything changes."
+  },
+  "32958770b810": {
+    "id": "howitworks-1",
+    "file": "/audio/narrations/howitworks-1.mp3",
+    "text": "The Business Brain is more than a bridge; it's a second brain that never forgets. Select a source on the left to see how it takes raw input, processes it contextually, and updates your entire business ecosystem."
+  },
+  "6fc39220e57a": {
+    "id": "howitworks-2",
+    "file": "/audio/narrations/howitworks-2.mp3",
+    "text": "Capturing raw input signal..."
+  },
+  "c5d972b6ec05": {
+    "id": "howitworks-3",
+    "file": "/audio/narrations/howitworks-3.mp3",
+    "text": "Correlating with client history, existing projects, and strategy..."
+  },
+  "152887cd98b6": {
+    "id": "howitworks-4",
+    "file": "/audio/narrations/howitworks-4.mp3",
+    "text": "Updates integrated across your business ecosystem."
+  },
+  "b83dbe058dbd": {
+    "id": "missingpiece-1",
+    "file": "/audio/narrations/missingpiece-1.mp3",
+    "text": "This is the solution. I call it the Business Brain. It takes your raw, unfiltered input and connects it to the AI."
+  },
+  "1848a35a94e5": {
+    "id": "missingpiece-2",
+    "file": "/audio/narrations/missingpiece-2.mp3",
+    "text": "Once connected, your AI is no longer a generic tool. It becomes a specialized partner that understands your entire business."
+  },
+  "07267ddaa314": {
+    "id": "automation-1",
+    "file": "/audio/narrations/automation-1.mp3",
+    "text": "Imagine one voice note. Normally, that's an hour of admin work. Organizing, emailing, updating. With the Business Brain, it happens in seconds."
+  },
+  "6427edfd596c": {
+    "id": "casestudy-1",
+    "file": "/audio/narrations/casestudy-1.mp3",
+    "text": "Here is a real example. An $1,800 API leak. Normally? Panic. Stress. A ruined weekend."
+  },
+  "713664a934a4": {
+    "id": "casestudy-2",
+    "file": "/audio/narrations/casestudy-2.mp3",
+    "text": "But the Business Brain detected it immediately. It ran the security protocol, rotated the keys, and analyzed the logs."
+  },
+  "67b05152ab53": {
+    "id": "casestudy-3",
+    "file": "/audio/narrations/casestudy-3.mp3",
+    "text": "In 20 minutes, it drafted the incident report, submitted the dispute, and secured a full refund. Zero human intervention."
+  },
+  "d60d2a75f4ad": {
+    "id": "graph-1",
+    "file": "/audio/narrations/graph-1.mp3",
+    "text": "Businesses that fully integrate AI will win. Others simply won't be able to compete. Generic AI plateaus quickly. But when you add a Context Layer..."
+  },
+  "6ea4d48f0df9": {
+    "id": "graph-2",
+    "file": "/audio/narrations/graph-2.mp3",
+    "text": "Your advantage compounds. It learns you. It gets smarter. The gap becomes impossible to close."
+  },
+  "2ce681e6bd9c": {
+    "id": "strategic-1",
+    "file": "/audio/narrations/strategic-1.mp3",
+    "text": "Your AI goes from a simple assistant to a Strategic Advisor. When it knows your hires, your clients, and your finances, you can ask the big questions."
+  },
+  "d0c8acd56ee4": {
+    "id": "strategic-2",
+    "file": "/audio/narrations/strategic-2.mp3",
+    "text": "And it answers them. Not with generic advice, but with deep, contextual strategy."
+  },
+  "63a67ae0b7a4": {
+    "id": "guarantee-1",
+    "file": "/audio/narrations/guarantee-1.mp3",
+    "text": "The guarantee isn't a specific ROI number. It's a strategic advantage. Starting now gives you a head start that compounds daily."
+  },
+  "9a995a925973": {
+    "id": "offer-1",
+    "file": "/audio/narrations/offer-1.mp3",
+    "text": "I'm looking for founding clients. Building this takes time to customize. In exchange for your detailed feedback, you get pricing that won't exist again. I have 5 spots available."
+  }
+}
