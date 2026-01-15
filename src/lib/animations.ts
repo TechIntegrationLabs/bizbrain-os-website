@@ -31,6 +31,7 @@ export const spring = {
   wobbly: { type: "spring" as const, stiffness: 180, damping: 12 },
   molasses: { type: "spring" as const, stiffness: 120, damping: 14 },
   quick: { type: "spring" as const, stiffness: 700, damping: 35 },
+  magnetic: { type: "spring" as const, stiffness: 150, damping: 15, mass: 0.1 },
 };
 
 // ============================================
