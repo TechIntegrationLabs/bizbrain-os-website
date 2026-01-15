@@ -15,12 +15,15 @@ export const MissingPieceSlide: React.FC<SlideProps> = ({ isActive, onComplete }
 
   useEffect(() => {
     if (isActive) {
-      playNarration("What if there was a bridge? A persistent layer of context that sits between you and AI. Something that remembers your clients, your projects, your patterns. We call it... the Business Brain.");
+      playNarration("This is the solution. I call it the Business Brain. It takes your raw, unfiltered input and connects it to the AI.");
 
       setPhase('intro');
 
       setTimeout(() => setPhase('reveal'), 2000);
-      setTimeout(() => setPhase('complete'), 4000);
+      setTimeout(() => {
+        setPhase('complete');
+        playNarration("Once connected, your AI is no longer a generic tool. It becomes a specialized partner that understands your entire business.");
+      }, 4000);
     } else {
       stopNarration();
       setPhase('intro');

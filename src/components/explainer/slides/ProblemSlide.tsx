@@ -50,7 +50,7 @@ export const ProblemSlide: React.FC<SlideProps> = ({ isActive, onComplete }) => 
 
   useEffect(() => {
     if (isActive) {
-      playNarration("Think about your current AI usage. You explain your business every time. It doesn't know who Smith Corp is. It can't remember last month's strategy. The problem isn't the AI. The problem is the context.");
+      playNarration("Here is the problem. Even the smartest AI is blind to your daily operations. Click the sources to see what it's missing.");
 
       // Stagger reveal of problem items
       let count = 0;
@@ -59,6 +59,10 @@ export const ProblemSlide: React.FC<SlideProps> = ({ isActive, onComplete }) => 
         setVisibleItems(count);
         if (count >= problemItems.length) {
           clearInterval(interval);
+          // Play second narration when all items revealed
+          setTimeout(() => {
+            playNarration("Without this data, it's just a generalist. But if we bridge this gap... everything changes.");
+          }, 500);
         }
       }, 600);
 

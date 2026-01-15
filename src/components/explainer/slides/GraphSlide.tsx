@@ -45,7 +45,7 @@ export const GraphSlide: React.FC<SlideProps> = ({ isActive, onComplete }) => {
 
   useEffect(() => {
     if (isActive) {
-      playNarration("Let me show you the difference. This is how generic AI adoption grows — slow, linear, limited. But when AI has deep context — your clients, your projects, your patterns — it compounds.");
+      playNarration("Businesses that fully integrate AI will win. Others simply won't be able to compete. Generic AI plateaus quickly. But when you add a Context Layer...");
 
       // Animate generic AI line first
       genericControls.start({
@@ -56,11 +56,12 @@ export const GraphSlide: React.FC<SlideProps> = ({ isActive, onComplete }) => {
       // Show and animate Business Brain line after delay
       setTimeout(() => {
         setShowBrainLine(true);
+        playNarration("Your advantage compounds. It learns you. It gets smarter. The gap becomes impossible to close.");
         brainControls.start({
           pathLength: 1,
           transition: { duration: 2.5, ease: "easeOut" }
         });
-      }, 2500);
+      }, 5000);
     } else {
       stopNarration();
       setShowBrainLine(false);

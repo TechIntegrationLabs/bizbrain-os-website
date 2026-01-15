@@ -177,7 +177,7 @@ export default function ExplainerPage() {
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
-          className="absolute inset-0 pt-16 pb-24"
+          className="absolute top-12 bottom-20 left-0 right-0"
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -100 }}
@@ -188,7 +188,7 @@ export default function ExplainerPage() {
             return (
               <div
                 key={slide.key}
-                className={`absolute inset-0 pt-16 pb-24 ${index === currentSlide ? 'visible' : 'hidden'}`}
+                className={`absolute inset-0 ${index === currentSlide ? 'visible' : 'hidden'}`}
               >
                 <SlideComponent
                   isActive={index === currentSlide}

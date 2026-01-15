@@ -25,7 +25,7 @@ export const OfferSlide: React.FC<SlideProps> = ({ isActive, onComplete }) => {
 
   useEffect(() => {
     if (isActive) {
-      playNarration("Here's the offer. Everything you need to deploy your Business Brain. Setup, configuration, and training — all included. And for founding clients, the first month is on us.");
+      playNarration("I'm looking for founding clients. Building this takes time to customize. In exchange for your detailed feedback, you get pricing that won't exist again. I have 5 spots available.");
 
       setRevealed(false);
       setShowCTA(false);

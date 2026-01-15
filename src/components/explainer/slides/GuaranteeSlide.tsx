@@ -42,7 +42,7 @@ export const GuaranteeSlide: React.FC<SlideProps> = ({ isActive, onComplete }) =
 
   useEffect(() => {
     if (isActive) {
-      playNarration("Here's our commitment: We're not selling software. We're selling transformation. If you don't see measurable results in 30 days, you get your money back. No questions asked.");
+      playNarration("The guarantee isn't a specific ROI number. It's a strategic advantage. Starting now gives you a head start that compounds daily.");
 
       setVisibleItems(0);
       let count = 0;
