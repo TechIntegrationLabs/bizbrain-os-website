@@ -11,7 +11,7 @@ dotenv.config({ path: '.env.local' });
 
 // Configuration
 const API_KEY = process.env.ELEVENLABS_API_KEY;
-const VOICE_ID = process.env.ELEVENLABS_VOICE_ID || 'pNInz6obpgDQGcFmaJgB'; // Adam - professional male voice
+const VOICE_ID = process.env.ELEVENLABS_VOICE_ID || 'TxGEqnHWrfWFTfGW9XjX'; // Josh - deep, natural, professional voice
 const OUTPUT_DIR = path.join(process.cwd(), 'public', 'audio', 'narrations');
 
 // All narration texts organized by slide
