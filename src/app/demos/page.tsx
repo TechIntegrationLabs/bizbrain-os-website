@@ -209,7 +209,7 @@ export default function DemosPage() {
               )}
             >
               {demos.map((demo) => {
-                const Icon = demo.icon;
+                const Icon = demo.icon as React.FC<{ className?: string; style?: React.CSSProperties }>;
                 return (
                   <motion.div
                     key={demo.id}
@@ -301,7 +301,10 @@ export default function DemosPage() {
                       className="w-12 h-12 rounded-xl flex items-center justify-center"
                       style={{ backgroundColor: `${activeDemo.color}20` }}
                     >
-                      <activeDemo.icon className="w-6 h-6" style={{ color: activeDemo.color }} />
+                      {(() => {
+                        const ActiveIcon = activeDemo.icon as React.FC<{ className?: string; style?: React.CSSProperties }>;
+                        return <ActiveIcon className="w-6 h-6" style={{ color: activeDemo.color }} />;
+                      })()}
                     </div>
                     <div>
                       <h2 className="text-2xl font-bold text-white">{activeDemo.name}</h2>

@@ -470,7 +470,7 @@ export const ContextGraph: React.FC<ContextGraphProps> = ({ className }) => {
               <div className="flex flex-wrap gap-2">
                 {Object.entries(nodeTypeConfig).map(([type, config]) => {
                   const isActive = activeFilters.has(type as NodeType);
-                  const Icon = config.icon;
+                  const Icon = config.icon as React.FC<{ className?: string; style?: React.CSSProperties }>;
                   return (
                     <button
                       key={type}

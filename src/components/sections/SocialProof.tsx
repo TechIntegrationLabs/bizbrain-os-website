@@ -133,7 +133,7 @@ export function SocialProof() {
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20"
         >
           {stats.map((stat, index) => {
-            const Icon = stat.icon;
+            const Icon = stat.icon as React.FC<{ className?: string; style?: React.CSSProperties }>;
             return (
               <motion.div
                 key={index}

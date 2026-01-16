@@ -2,8 +2,19 @@
 
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Home, Volume2, VolumeX, Pause, Play } from 'lucide-react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import {
+  Sparkles,
+  TrendingUp,
+  AlertTriangle,
+  Brain,
+  Workflow,
+  Zap,
+  FileCheck,
+  MessageSquare,
+  Shield,
+  Gift
+} from 'lucide-react';
 
 // Import all slides
 import { IntroSlide } from '@/components/explainer/slides/IntroSlide';
@@ -17,22 +28,24 @@ import { StrategicSlide } from '@/components/explainer/slides/StrategicSlide';
 import { GuaranteeSlide } from '@/components/explainer/slides/GuaranteeSlide';
 import { OfferSlide } from '@/components/explainer/slides/OfferSlide';
 import { useNarrationStore, NarrationControls } from '@/components/explainer/ui/Narration';
+import { SlideNavigation } from '@/components/explainer/ui/SlideNavigation';
 
-// Slide configuration
+// Slide configuration with icons for grid view
 const slides = [
-  { key: 'intro', label: 'Introduction', component: IntroSlide },
-  { key: 'graph', label: 'The Reality', component: GraphSlide },
-  { key: 'problem', label: 'The Problem', component: ProblemSlide },
-  { key: 'missingPiece', label: 'The Solution', component: MissingPieceSlide },
-  { key: 'howItWorks', label: 'How It Works', component: HowItWorksSlide },
-  { key: 'automation', label: 'Automation', component: AutomationSlide },
-  { key: 'caseStudy', label: 'Case Study', component: CaseStudySlide },
-  { key: 'strategic', label: 'Strategic Advisor', component: StrategicSlide },
-  { key: 'guarantee', label: 'The Guarantee', component: GuaranteeSlide },
-  { key: 'offer', label: 'Get Started', component: OfferSlide },
+  { key: 'intro', label: 'Introduction', component: IntroSlide, icon: <Sparkles className="w-5 h-5" />, chapter: 'The Challenge' },
+  { key: 'graph', label: 'The Reality', component: GraphSlide, icon: <TrendingUp className="w-5 h-5" />, chapter: 'The Challenge' },
+  { key: 'problem', label: 'The Problem', component: ProblemSlide, icon: <AlertTriangle className="w-5 h-5" />, chapter: 'The Challenge' },
+  { key: 'missingPiece', label: 'The Solution', component: MissingPieceSlide, icon: <Brain className="w-5 h-5" />, chapter: 'The Solution' },
+  { key: 'howItWorks', label: 'How It Works', component: HowItWorksSlide, icon: <Workflow className="w-5 h-5" />, chapter: 'The Solution' },
+  { key: 'automation', label: 'Automation', component: AutomationSlide, icon: <Zap className="w-5 h-5" />, chapter: 'The Solution' },
+  { key: 'caseStudy', label: 'Case Study', component: CaseStudySlide, icon: <FileCheck className="w-5 h-5" />, chapter: 'Real Results' },
+  { key: 'strategic', label: 'Strategic Advisor', component: StrategicSlide, icon: <MessageSquare className="w-5 h-5" />, chapter: 'Real Results' },
+  { key: 'guarantee', label: 'The Guarantee', component: GuaranteeSlide, icon: <Shield className="w-5 h-5" />, chapter: 'Get Started' },
+  { key: 'offer', label: 'Get Started', component: OfferSlide, icon: <Gift className="w-5 h-5" />, chapter: 'Get Started' },
 ];
 
 export default function ExplainerPage() {
+  const router = useRouter();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -113,65 +126,19 @@ export default function ExplainerPage() {
     };
   }, [isAutoPlaying]);
 
-  const progress = ((currentSlide + 1) / slides.length) * 100;
-
   return (
     <div className="fixed inset-0 bg-background overflow-hidden">
-      {/* Progress bar */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-white/10 z-50">
-        <motion.div
-          className="h-full bg-gradient-to-r from-cyan-500 to-emerald-500"
-          initial={{ width: 0 }}
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-        />
-      </div>
-
-      {/* Top navigation */}
-      <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-50">
-        {/* Home button */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 px-4 py-2 text-white/60 hover:text-white bg-white/5 hover:bg-white/10 rounded-full transition-all"
-        >
-          <Home className="w-4 h-4" />
-          <span className="text-sm font-medium hidden sm:inline">Back to Home</span>
-        </Link>
-
-        {/* Slide counter */}
-        <div className="text-white/40 text-sm font-mono">
-          {String(currentSlide + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
-        </div>
-
-        {/* Controls */}
-        <div className="flex items-center gap-2">
-          {/* Auto-play toggle */}
-          <button
-            onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-            className={`p-2 rounded-full transition-all ${
-              isAutoPlaying
-                ? 'bg-cyan-500/20 text-cyan-400'
-                : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
-            }`}
-            title={isAutoPlaying ? 'Pause auto-play' : 'Start auto-play'}
-          >
-            {isAutoPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-          </button>
-
-          {/* Narration toggle */}
-          <button
-            onClick={toggleNarration}
-            className={`p-2 rounded-full transition-all ${
-              narrationEnabled
-                ? 'bg-cyan-500/20 text-cyan-400'
-                : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
-            }`}
-            title={narrationEnabled ? 'Mute narration' : 'Enable narration'}
-          >
-            {narrationEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
-          </button>
-        </div>
-      </div>
+      {/* Enhanced Navigation Component */}
+      <SlideNavigation
+        slides={slides.map(s => ({ key: s.key, label: s.label, icon: s.icon, chapter: s.chapter }))}
+        currentSlide={currentSlide}
+        onSlideChange={goToSlide}
+        isAutoPlaying={isAutoPlaying}
+        onAutoPlayToggle={() => setIsAutoPlaying(!isAutoPlaying)}
+        narrationEnabled={narrationEnabled}
+        onNarrationToggle={toggleNarration}
+        onHomeClick={() => router.push('/')}
+      />
 
       {/* Main slide area */}
       <AnimatePresence mode="wait">
@@ -200,72 +167,8 @@ export default function ExplainerPage() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Bottom navigation */}
-      <div className="absolute bottom-6 left-0 right-0 flex items-center justify-center gap-4 z-50">
-        {/* Previous button */}
-        <button
-          onClick={prevSlide}
-          disabled={currentSlide === 0}
-          className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${
-            currentSlide === 0
-              ? 'bg-white/5 text-white/30 cursor-not-allowed'
-              : 'bg-white/10 text-white hover:bg-white/20'
-          }`}
-        >
-          <ChevronLeft className="w-4 h-4" />
-          <span className="text-sm font-medium hidden sm:inline">Previous</span>
-        </button>
-
-        {/* Slide indicators */}
-        <div className="flex items-center gap-2">
-          {slides.map((slide, index) => (
-            <button
-              key={slide.key}
-              onClick={() => goToSlide(index)}
-              className="group relative p-1"
-              title={slide.label}
-            >
-              <div
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentSlide
-                    ? 'bg-cyan-400 scale-125'
-                    : index < currentSlide
-                    ? 'bg-emerald-500/60'
-                    : 'bg-white/20 hover:bg-white/40'
-                }`}
-              />
-              {/* Tooltip */}
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-surface rounded text-xs text-white/80 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                {slide.label}
-              </div>
-            </button>
-          ))}
-        </div>
-
-        {/* Next button */}
-        <button
-          onClick={nextSlide}
-          disabled={currentSlide === slides.length - 1}
-          className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${
-            currentSlide === slides.length - 1
-              ? 'bg-white/5 text-white/30 cursor-not-allowed'
-              : 'bg-gradient-to-r from-cyan-500 to-emerald-500 text-white hover:from-cyan-400 hover:to-emerald-400 shadow-lg shadow-cyan-500/20'
-          }`}
-        >
-          <span className="text-sm font-medium hidden sm:inline">Next</span>
-          <ChevronRight className="w-4 h-4" />
-        </button>
-      </div>
-
       {/* Narration subtitle display */}
       <NarrationControls />
-
-      {/* Keyboard hints */}
-      <div className="absolute bottom-4 right-4 text-white/20 text-xs hidden lg:flex items-center gap-4 z-50">
-        <span>← → Navigate</span>
-        <span>Space Next</span>
-        <span>Esc Exit Auto-play</span>
-      </div>
     </div>
   );
 }

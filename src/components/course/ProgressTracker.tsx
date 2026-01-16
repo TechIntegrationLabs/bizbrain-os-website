@@ -128,7 +128,7 @@ export function ProgressTracker({
         {/* Module Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {modules.map((module, index) => {
-            const Icon = moduleIcons[module.icon] || Brain;
+            const Icon = (moduleIcons[module.icon] || Brain) as React.FC<{ className?: string; style?: React.CSSProperties }>;
             const moduleProgress = getModuleProgress(module);
             const isComplete = isModuleCompleted(module);
 
@@ -251,7 +251,7 @@ export function ProgressTracker({
       {/* Module List */}
       <div className="flex-1 overflow-y-auto">
         {modules.map(module => {
-          const Icon = moduleIcons[module.icon] || Brain;
+          const Icon = (moduleIcons[module.icon] || Brain) as React.FC<{ className?: string; style?: React.CSSProperties }>;
           const isExpanded = expandedModules.includes(module.id);
           const isComplete = isModuleCompleted(module);
           const isCurrent = currentModuleId === module.id;

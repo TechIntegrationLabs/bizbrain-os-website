@@ -406,7 +406,7 @@ export default function FeaturesPage() {
 
           <div className="flex flex-wrap gap-2">
             {categories.map(cat => {
-              const Icon = cat.icon;
+              const Icon = cat.icon as React.FC<{ className?: string }>;
               return (
                 <button
                   key={cat.id}
@@ -435,7 +435,7 @@ export default function FeaturesPage() {
         >
           <AnimatePresence mode="popLayout">
             {filteredFeatures.map((feature) => {
-              const Icon = feature.icon;
+              const Icon = feature.icon as React.FC<{ className?: string; style?: React.CSSProperties }>;
               const isExpanded = expandedFeature === feature.id;
 
               return (

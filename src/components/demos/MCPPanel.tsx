@@ -335,8 +335,8 @@ export const MCPPanel: React.FC<MCPPanelProps> = ({ className }) => {
           className="space-y-2"
         >
           {filteredServers.map((server) => {
-            const StatusIcon = statusConfig[server.status].icon;
-            const ServerIcon = server.icon;
+            const StatusIcon = statusConfig[server.status].icon as React.FC<{ className?: string; style?: React.CSSProperties }>;
+            const ServerIcon = server.icon as React.FC<{ className?: string; style?: React.CSSProperties }>;
             const isSelected = selectedServer?.id === server.id;
 
             return (

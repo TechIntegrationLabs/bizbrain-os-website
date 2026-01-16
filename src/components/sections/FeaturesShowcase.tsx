@@ -378,7 +378,7 @@ export function FeaturesShowcase() {
         >
           <AnimatePresence mode="popLayout">
             {filteredFeatures.map((feature) => {
-              const Icon = feature.icon;
+              const Icon = feature.icon as React.FC<{ className?: string; style?: React.CSSProperties }>;
               const isExpanded = expandedFeature === feature.id;
               const isHovered = hoveredFeature === feature.id;
 

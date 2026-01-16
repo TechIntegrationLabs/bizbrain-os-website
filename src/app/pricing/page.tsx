@@ -220,7 +220,7 @@ export default function PricingPage() {
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-16">
           {tiers.map((tier, index) => {
-            const Icon = tier.icon;
+            const Icon = tier.icon as React.FC<{ className?: string; style?: React.CSSProperties }>;
             return (
               <motion.div
                 key={tier.id}

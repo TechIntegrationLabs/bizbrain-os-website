@@ -89,9 +89,9 @@ const FolderNode: React.FC<FolderNodeProps> = ({ node, depth }) => {
   const [isOpen, setIsOpen] = useState(depth < 2);
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const Icon = node.type === 'folder'
+  const Icon = (node.type === 'folder'
     ? (isOpen ? FolderOpen : (node.icon || Folder))
-    : (node.icon || File);
+    : (node.icon || File)) as React.FC<{ className?: string; style?: React.CSSProperties }>;
 
   const hasChildren = node.children && node.children.length > 0;
 
