@@ -247,6 +247,11 @@ export const AutomationSlide: React.FC<SlideProps> = ({ isActive, onComplete }) 
   const [completedOutputs, setCompletedOutputs] = useState<string[]>([]);
   const [items, setItems] = useState(outputItems);
   const [showComparison, setShowComparison] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const totalManualTime = outputItems.reduce((acc, item) => acc + item.manualTime, 0);
 
@@ -388,20 +393,26 @@ export const AutomationSlide: React.FC<SlideProps> = ({ isActive, onComplete }) 
               <div className="w-40 h-48 border-2 border-white/20 rounded-3xl bg-surface/50 flex items-center justify-center relative overflow-hidden">
                 {/* 3D Waveform */}
                 <div className="absolute inset-0">
-                  <Suspense fallback={
+                  {mounted ? (
+                    <Suspense fallback={
+                      <div className="w-full h-full flex items-center justify-center">
+                        <Mic className="w-10 h-10 text-cyan-400 animate-pulse" />
+                      </div>
+                    }>
+                      <Canvas camera={{ position: [0, 2, 4], fov: 50 }}>
+                        <ambientLight intensity={0.5} />
+                        <pointLight position={[10, 10, 10]} intensity={1} />
+                        <Waveform3D
+                          isRecording={phase === 'recording'}
+                          isProcessing={phase === 'processing'}
+                        />
+                      </Canvas>
+                    </Suspense>
+                  ) : (
                     <div className="w-full h-full flex items-center justify-center">
                       <Mic className="w-10 h-10 text-cyan-400 animate-pulse" />
                     </div>
-                  }>
-                    <Canvas camera={{ position: [0, 2, 4], fov: 50 }}>
-                      <ambientLight intensity={0.5} />
-                      <pointLight position={[10, 10, 10]} intensity={1} />
-                      <Waveform3D
-                        isRecording={phase === 'recording'}
-                        isProcessing={phase === 'processing'}
-                      />
-                    </Canvas>
-                  </Suspense>
+                  )}
                 </div>
               </div>
 

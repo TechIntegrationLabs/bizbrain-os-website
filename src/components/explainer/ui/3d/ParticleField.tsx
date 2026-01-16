@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial, Line } from '@react-three/drei';
 import * as THREE from 'three';
@@ -59,6 +59,16 @@ export const ParticleField: React.FC<ParticleFieldProps> = ({
   className = '',
   ...props
 }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className={`absolute inset-0 pointer-events-none ${className}`} />;
+  }
+
   return (
     <div className={`absolute inset-0 pointer-events-none ${className}`}>
       <Canvas
@@ -146,6 +156,16 @@ export const NeuralParticleField: React.FC<NeuralParticlesProps> = ({
   className = '',
   ...props
 }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className={`absolute inset-0 pointer-events-none ${className}`} />;
+  }
+
   return (
     <div className={`absolute inset-0 pointer-events-none ${className}`}>
       <Canvas

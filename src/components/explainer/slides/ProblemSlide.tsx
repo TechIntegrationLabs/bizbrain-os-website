@@ -104,6 +104,12 @@ const ProblemCard: React.FC<{
   onToggle: () => void;
   onPainIncrease: () => void;
 }> = ({ item, index, isVisible, isExpanded, onToggle, onPainIncrease }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const handleClick = () => {
     if (!isExpanded) {
       onPainIncrease();
@@ -138,13 +144,15 @@ const ProblemCard: React.FC<{
           <div className="flex items-center gap-4">
             {/* 3D Icon Container */}
             <div className={`w-14 h-14 rounded-xl ${item.bgColor} border ${item.borderColor} overflow-hidden`}>
-              <Canvas camera={{ position: [0, 0, 2], fov: 50 }}>
-                <Suspense fallback={null}>
-                  <Warning3D color={item.hexColor} isActive={isExpanded} />
-                  <ambientLight intensity={0.4} />
-                  <pointLight position={[2, 2, 2]} intensity={0.8} color={item.hexColor} />
-                </Suspense>
-              </Canvas>
+              {mounted && (
+                <Canvas camera={{ position: [0, 0, 2], fov: 50 }}>
+                  <Suspense fallback={null}>
+                    <Warning3D color={item.hexColor} isActive={isExpanded} />
+                    <ambientLight intensity={0.4} />
+                    <pointLight position={[2, 2, 2]} intensity={0.8} color={item.hexColor} />
+                  </Suspense>
+                </Canvas>
+              )}
             </div>
             <div>
               <h3 className="text-xl font-bold text-white">{item.title}</h3>
@@ -299,10 +307,15 @@ const problemItems = [
 ];
 
 export const ProblemSlide: React.FC<SlideProps> = ({ isActive, onComplete }) => {
+  const [mounted, setMounted] = useState(false);
   const [visibleItems, setVisibleItems] = useState<number>(0);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [painLevel, setPainLevel] = useState<number>(0);
   const [showQuote, setShowQuote] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isActive) {
@@ -345,14 +358,16 @@ export const ProblemSlide: React.FC<SlideProps> = ({ isActive, onComplete }) => 
     <div className="h-full w-full flex flex-col items-center justify-center px-8 relative overflow-hidden">
       {/* 3D Warning Background */}
       <div className="absolute inset-0 opacity-40">
-        <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
-          <Suspense fallback={null}>
-            <WarningParticles count={30} />
-            <ambientLight intensity={0.3} />
-            <pointLight position={[5, 5, 5]} intensity={0.5} color="#ef4444" />
-            <pointLight position={[-5, -5, 5]} intensity={0.5} color="#f97316" />
-          </Suspense>
-        </Canvas>
+        {mounted && (
+          <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
+            <Suspense fallback={null}>
+              <WarningParticles count={30} />
+              <ambientLight intensity={0.3} />
+              <pointLight position={[5, 5, 5]} intensity={0.5} color="#ef4444" />
+              <pointLight position={[-5, -5, 5]} intensity={0.5} color="#f97316" />
+            </Suspense>
+          </Canvas>
+        )}
       </div>
 
       {/* Gradient overlays */}

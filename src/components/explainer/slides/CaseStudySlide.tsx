@@ -317,6 +317,11 @@ export const CaseStudySlide: React.FC<SlideProps> = ({ isActive, onComplete }) =
   const [showNotifications, setShowNotifications] = useState(false);
   const [showActionLog, setShowActionLog] = useState(false);
   const [isInteractive, setIsInteractive] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isActive) {
@@ -445,13 +450,17 @@ export const CaseStudySlide: React.FC<SlideProps> = ({ isActive, onComplete }) =
             animate={{ opacity: phase === 1 ? 1 : 0.3 }}
             transition={{ duration: 0.5 }}
           >
-            <Suspense fallback={<AlertTriangle className="w-12 h-12 text-red-400 mx-auto" />}>
-              <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} intensity={1} />
-                <Alert3D color="#ef4444" isActive={phase === 1} />
-              </Canvas>
-            </Suspense>
+            {mounted ? (
+              <Suspense fallback={<AlertTriangle className="w-12 h-12 text-red-400 mx-auto" />}>
+                <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
+                  <ambientLight intensity={0.5} />
+                  <pointLight position={[10, 10, 10]} intensity={1} />
+                  <Alert3D color="#ef4444" isActive={phase === 1} />
+                </Canvas>
+              </Suspense>
+            ) : (
+              <AlertTriangle className="w-12 h-12 text-red-400 mx-auto" />
+            )}
           </motion.div>
 
           {/* Arrow */}
@@ -493,13 +502,17 @@ export const CaseStudySlide: React.FC<SlideProps> = ({ isActive, onComplete }) =
             animate={{ opacity: phase === 3 ? 1 : 0.3 }}
             transition={{ duration: 0.5 }}
           >
-            <Suspense fallback={<ShieldCheck className="w-12 h-12 text-emerald-400 mx-auto" />}>
-              <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} intensity={1} />
-                <Shield3D isActive={phase === 3} />
-              </Canvas>
-            </Suspense>
+            {mounted ? (
+              <Suspense fallback={<ShieldCheck className="w-12 h-12 text-emerald-400 mx-auto" />}>
+                <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
+                  <ambientLight intensity={0.5} />
+                  <pointLight position={[10, 10, 10]} intensity={1} />
+                  <Shield3D isActive={phase === 3} />
+                </Canvas>
+              </Suspense>
+            ) : (
+              <ShieldCheck className="w-12 h-12 text-emerald-400 mx-auto" />
+            )}
           </motion.div>
         </div>
 

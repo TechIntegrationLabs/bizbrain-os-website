@@ -316,6 +316,11 @@ export const GraphSlide: React.FC<SlideProps> = ({ isActive, onComplete }) => {
   const [showGap, setShowGap] = useState(false);
   const genericControls = useAnimation();
   const brainControls = useAnimation();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const graphWidth = 600;
   const graphHeight = 350;
@@ -391,11 +396,13 @@ export const GraphSlide: React.FC<SlideProps> = ({ isActive, onComplete }) => {
             animate={{ scale: isActive ? 1 : 0, opacity: isActive ? 1 : 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Canvas camera={{ position: [0, 0, 3], fov: 45 }}>
-              <Suspense fallback={null}>
-                <GrowthIcon3D isActive={showBrainLine} />
-              </Suspense>
-            </Canvas>
+            {mounted && (
+              <Canvas camera={{ position: [0, 0, 3], fov: 45 }}>
+                <Suspense fallback={null}>
+                  <GrowthIcon3D isActive={showBrainLine} />
+                </Suspense>
+              </Canvas>
+            )}
           </motion.div>
 
           <div className="text-center md:text-left">

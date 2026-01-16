@@ -88,6 +88,16 @@ export const SparkEffect: React.FC<SparkEffectProps> = ({
   className = '',
   ...props
 }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className={`absolute inset-0 pointer-events-none ${className}`} />;
+  }
+
   return (
     <div className={`absolute inset-0 pointer-events-none ${className}`}>
       <Canvas
@@ -164,6 +174,16 @@ export const ConnectionBeam: React.FC<ConnectionBeamProps> = ({
   className = '',
   ...props
 }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className={`absolute inset-0 pointer-events-none ${className}`} />;
+  }
+
   return (
     <div className={`absolute inset-0 pointer-events-none ${className}`}>
       <Canvas
@@ -260,6 +280,16 @@ export const DataFlow: React.FC<DataFlowProps> = ({
   className = '',
   ...props
 }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className={`absolute inset-0 pointer-events-none ${className}`} />;
+  }
+
   return (
     <div className={`absolute inset-0 pointer-events-none ${className}`}>
       <Canvas

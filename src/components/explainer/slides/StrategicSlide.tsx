@@ -244,10 +244,16 @@ const InsightTag: React.FC<{ insight: Insight; delay: number }> = ({ insight, de
 };
 
 export const StrategicSlide: React.FC<SlideProps> = ({ isActive, onComplete }) => {
+  const [mounted, setMounted] = useState(false);
   const [selectedQuestion, setSelectedQuestion] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [showResponse, setShowResponse] = useState(false);
   const [typedText, setTypedText] = useState('');
+
+  // SSR fix: Only render Canvas after client-side mount
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const questions: StrategicQuestion[] = [
     {
@@ -410,11 +416,13 @@ export const StrategicSlide: React.FC<SlideProps> = ({ isActive, onComplete }) =
               animate={{ scale: isActive ? 1 : 0.8, opacity: isActive ? 1 : 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <Canvas camera={{ position: [0, 0, 4], fov: 45 }}>
-                <Suspense fallback={null}>
-                  <Brain3D isProcessing={isProcessing} isComplete={showResponse} />
-                </Suspense>
-              </Canvas>
+              {mounted && (
+                <Canvas camera={{ position: [0, 0, 4], fov: 45 }}>
+                  <Suspense fallback={null}>
+                    <Brain3D isProcessing={isProcessing} isComplete={showResponse} />
+                  </Suspense>
+                </Canvas>
+              )}
             </motion.div>
 
             {/* Processing indicator */}

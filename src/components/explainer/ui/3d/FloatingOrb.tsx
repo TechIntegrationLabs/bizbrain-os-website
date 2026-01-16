@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Sphere, MeshDistortMaterial, GradientTexture, Float } from '@react-three/drei';
 import * as THREE from 'three';
@@ -58,6 +58,16 @@ export const FloatingOrb: React.FC<FloatingOrbProps> = ({
   className = '',
   ...props
 }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className={className} />;
+  }
+
   return (
     <div className={`${className}`}>
       <Canvas
@@ -122,6 +132,16 @@ export const FloatingOrbCluster: React.FC<OrbClusterProps> = ({
   className = '',
   ...props
 }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className={`absolute inset-0 pointer-events-none ${className}`} />;
+  }
+
   return (
     <div className={`absolute inset-0 pointer-events-none ${className}`}>
       <Canvas

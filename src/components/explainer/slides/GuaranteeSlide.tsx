@@ -544,11 +544,17 @@ const guaranteeCards = [
 ];
 
 export const GuaranteeSlide: React.FC<SlideProps> = ({ isActive, onComplete }) => {
+  const [mounted, setMounted] = useState(false);
   const [show, setShow] = useState(false);
   const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
   const [showCalculator, setShowCalculator] = useState(false);
   const [counterStartTime, setCounterStartTime] = useState<number | null>(null);
   const [timelineProgress, setTimelineProgress] = useState(0);
+
+  // SSR fix: Only render Canvas after client-side mount
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isActive) {
@@ -630,11 +636,13 @@ export const GuaranteeSlide: React.FC<SlideProps> = ({ isActive, onComplete }) =
               transition={{ delay: 0.2 }}
               className="h-44 w-full rounded-2xl overflow-hidden bg-gradient-to-br from-surface to-surface/50 border border-white/10"
             >
-              <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
-                <React.Suspense fallback={null}>
-                  <Trophy3D isActive={show} />
-                </React.Suspense>
-              </Canvas>
+              {mounted && (
+                <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
+                  <React.Suspense fallback={null}>
+                    <Trophy3D isActive={show} />
+                  </React.Suspense>
+                </Canvas>
+              )}
             </motion.div>
 
             {/* Competitive Chart */}

@@ -224,6 +224,11 @@ export const MissingPieceSlide: React.FC<SlideProps> = ({ isActive, onComplete }
   const [rightConnected, setRightConnected] = useState(false);
   const [sparkPositions, setSparkPositions] = useState<{ x: number; y: number }[]>([]);
   const brainRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const isFullyConnected = leftConnected && rightConnected;
 
@@ -289,15 +294,17 @@ export const MissingPieceSlide: React.FC<SlideProps> = ({ isActive, onComplete }
     <div className="h-full w-full flex flex-col items-center justify-center px-8 relative overflow-hidden">
       {/* 3D Background */}
       <div className="absolute inset-0 opacity-30">
-        <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
-          <Suspense fallback={null}>
-            <Float speed={1} rotationIntensity={0.1} floatIntensity={0.2}>
-              <Sparkles count={100} scale={10} size={2} speed={0.5} color="#06b6d4" />
-            </Float>
-            <ambientLight intensity={0.3} />
-            <pointLight position={[5, 5, 5]} intensity={0.5} color="#06b6d4" />
-          </Suspense>
-        </Canvas>
+        {mounted && (
+          <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
+            <Suspense fallback={null}>
+              <Float speed={1} rotationIntensity={0.1} floatIntensity={0.2}>
+                <Sparkles count={100} scale={10} size={2} speed={0.5} color="#06b6d4" />
+              </Float>
+              <ambientLight intensity={0.3} />
+              <pointLight position={[5, 5, 5]} intensity={0.5} color="#06b6d4" />
+            </Suspense>
+          </Canvas>
+        )}
       </div>
 
       {/* Gradient overlays */}
@@ -412,14 +419,16 @@ export const MissingPieceSlide: React.FC<SlideProps> = ({ isActive, onComplete }
                   ref={brainRef}
                   className="relative w-32 h-32 md:w-44 md:h-44"
                 >
-                  <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
-                    <Suspense fallback={null}>
-                      <Brain3D isActive={true} isConnected={isFullyConnected} />
-                      <ambientLight intensity={0.4} />
-                      <pointLight position={[3, 3, 3]} intensity={0.8} color="#06b6d4" />
-                      <pointLight position={[-3, -3, 3]} intensity={0.5} color="#10b981" />
-                    </Suspense>
-                  </Canvas>
+                  {mounted && (
+                    <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
+                      <Suspense fallback={null}>
+                        <Brain3D isActive={true} isConnected={isFullyConnected} />
+                        <ambientLight intensity={0.4} />
+                        <pointLight position={[3, 3, 3]} intensity={0.8} color="#06b6d4" />
+                        <pointLight position={[-3, -3, 3]} intensity={0.5} color="#10b981" />
+                      </Suspense>
+                    </Canvas>
+                  )}
 
                   {/* Drop zone indicator */}
                   {phase === 'drag' && !isFullyConnected && (

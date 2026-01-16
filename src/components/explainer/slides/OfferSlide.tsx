@@ -653,9 +653,15 @@ const CalendarBooking: React.FC<CalendarBookingProps> = ({ isVisible, selectedTi
 
 // Main OfferSlide Component
 export const OfferSlide: React.FC<SlideProps> = ({ isActive, onComplete }) => {
+  const [mounted, setMounted] = useState(false);
   const [phase, setPhase] = useState<'intro' | 'pricing' | 'complete'>('intro');
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [spotsRemaining] = useState(3); // Simulated scarcity
+
+  // SSR fix: Only render Canvas after client-side mount
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isActive) {
@@ -736,25 +742,29 @@ export const OfferSlide: React.FC<SlideProps> = ({ isActive, onComplete }) => {
 
       {/* 3D Scene */}
       <div className="absolute top-4 right-8 w-40 h-40 pointer-events-none">
-        <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
-          <Suspense fallback={null}>
-            <ambientLight intensity={0.4} />
-            <pointLight position={[10, 10, 10]} intensity={0.8} />
-            <pointLight position={[-10, -10, -10]} intensity={0.3} color="#06b6d4" />
-            <Crown3D isActive={isActive && phase !== 'intro'} />
-          </Suspense>
-        </Canvas>
+        {mounted && (
+          <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
+            <Suspense fallback={null}>
+              <ambientLight intensity={0.4} />
+              <pointLight position={[10, 10, 10]} intensity={0.8} />
+              <pointLight position={[-10, -10, -10]} intensity={0.3} color="#06b6d4" />
+              <Crown3D isActive={isActive && phase !== 'intro'} />
+            </Suspense>
+          </Canvas>
+        )}
       </div>
 
       {/* Gift Box 3D - Left Side */}
       <div className="absolute bottom-20 left-8 w-32 h-32 pointer-events-none">
-        <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
-          <Suspense fallback={null}>
-            <ambientLight intensity={0.4} />
-            <pointLight position={[5, 5, 5]} intensity={0.6} />
-            <GiftBox3D isActive={isActive && phase !== 'intro'} />
-          </Suspense>
-        </Canvas>
+        {mounted && (
+          <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
+            <Suspense fallback={null}>
+              <ambientLight intensity={0.4} />
+              <pointLight position={[5, 5, 5]} intensity={0.6} />
+              <GiftBox3D isActive={isActive && phase !== 'intro'} />
+            </Suspense>
+          </Canvas>
+        )}
       </div>
 
       {/* Header */}

@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useEffect, useState, useCallback, Suspense } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Canvas } from '@react-three/fiber';
 import { Mic, FileText, Lightbulb, CheckCircle, User, FileOutput, Calendar, Sparkles, Zap, Terminal } from 'lucide-react';
 import { playNarration, stopNarration } from '../ui/Narration';
 import { AnimatedBrain, ParticleField, SparkEffect } from '../ui/3d';
@@ -208,15 +207,8 @@ export const HowItWorksSlide: React.FC<SlideProps> = ({ isActive, onComplete }) 
 
   return (
     <div className="h-full w-full flex flex-col items-center justify-center px-4 md:px-8 relative overflow-hidden">
-      {/* 3D Background */}
-      <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-          <Suspense fallback={null}>
-            <ParticleField count={100} color="#06b6d4" speed={0.2} opacity={0.3} />
-            <ambientLight intensity={0.5} />
-          </Suspense>
-        </Canvas>
-      </div>
+      {/* 3D Background - ParticleField has its own Canvas */}
+      <ParticleField count={100} color="#06b6d4" speed={0.2} opacity={0.3} />
 
       {/* Gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-emerald-500/10 z-0" />
@@ -411,36 +403,24 @@ export const HowItWorksSlide: React.FC<SlideProps> = ({ isActive, onComplete }) 
               </>
             )}
 
-            {/* 3D Brain Canvas */}
+            {/* 3D Brain - AnimatedBrain has its own Canvas */}
             <div className="relative w-64 h-64 md:w-80 md:h-80">
-              <Canvas camera={{ position: [0, 0, 4], fov: 50 }}>
-                <Suspense fallback={null}>
-                  <AnimatedBrain
-                    isActive={isActive}
-                    phase={phase}
-                    primaryColor="#06b6d4"
-                    secondaryColor="#10b981"
-                    size={1.5}
-                  />
-                  <ambientLight intensity={0.4} />
-                  <pointLight position={[10, 10, 10]} intensity={0.8} color="#06b6d4" />
-                  <pointLight position={[-10, -10, -10]} intensity={0.4} color="#10b981" />
-                </Suspense>
-              </Canvas>
+              <AnimatedBrain
+                isActive={isActive}
+                phase={phase}
+                primaryColor="#06b6d4"
+                secondaryColor="#10b981"
+                size={1.5}
+                className="w-full h-full"
+              />
 
-              {/* Spark effects during processing */}
+              {/* Spark effects during processing - SparkEffect has its own Canvas */}
               {showSparks && (
-                <div className="absolute inset-0 pointer-events-none">
-                  <Canvas camera={{ position: [0, 0, 5] }}>
-                    <Suspense fallback={null}>
-                      <SparkEffect
-                        position={[0, 0, 0]}
-                        color="#06b6d4"
-                        count={20}
-                      />
-                    </Suspense>
-                  </Canvas>
-                </div>
+                <SparkEffect
+                  position={[0, 0, 0]}
+                  color="#06b6d4"
+                  count={20}
+                />
               )}
 
               {/* Glow effects */}

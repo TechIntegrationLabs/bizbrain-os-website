@@ -281,6 +281,16 @@ export const AnimatedBrain: React.FC<AnimatedBrainProps> = ({
   className = '',
   ...props
 }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className={className} />;
+  }
+
   return (
     <div className={`${className}`}>
       <Canvas

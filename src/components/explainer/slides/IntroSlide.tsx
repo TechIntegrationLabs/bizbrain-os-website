@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useEffect, useState, Suspense, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Canvas } from '@react-three/fiber';
 import { playNarration, stopNarration } from '../ui/Narration';
 import { NeuralParticleField, FloatingOrbCluster } from '../ui/3d';
 import { ThumbsUp, ThumbsDown, Meh, ArrowRight, Sparkles, Users } from 'lucide-react';
@@ -166,22 +165,15 @@ export const IntroSlide: React.FC<SlideProps> = ({ isActive, onComplete }) => {
   return (
     <div className="h-full w-full flex flex-col items-center justify-center px-4 md:px-8 relative overflow-hidden">
       {/* 3D Neural Background */}
-      <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
-          <Suspense fallback={null}>
-            <NeuralParticleField
-              nodeCount={30}
-              connectionCount={50}
-              color="#06b6d4"
-            />
-            <FloatingOrbCluster
-              count={3}
-              colors={['#06b6d4', '#10b981', '#f59e0b']}
-            />
-            <ambientLight intensity={0.3} />
-          </Suspense>
-        </Canvas>
-      </div>
+      <NeuralParticleField
+        nodeCount={30}
+        connectionCount={50}
+        color="#06b6d4"
+      />
+      <FloatingOrbCluster
+        count={3}
+        colors={['#06b6d4', '#10b981', '#f59e0b']}
+      />
 
       {/* Gradient overlays */}
       <div className="absolute inset-0 bg-gradient-radial from-cyan-500/10 via-transparent to-transparent z-0" />
