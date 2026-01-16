@@ -177,7 +177,7 @@ export default function ExplainerPage() {
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
-          className="absolute top-12 bottom-20 left-0 right-0"
+          className="absolute top-14 bottom-24 left-0 right-0 overflow-hidden"
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -100 }}

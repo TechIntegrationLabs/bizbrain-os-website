@@ -43,17 +43,32 @@ const hashText = (text: string): string => {
   return '';
 };
 
-// Find audio file in manifest by matching text
+// Normalize text for comparison (trim, lowercase, remove extra spaces)
+const normalizeText = (text: string): string => {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, ' ')
+    .replace(/['']/g, "'")
+    .replace(/[""]/g, '"');
+};
+
+// Find audio file in manifest by matching text (with normalization)
 const findAudioFile = (text: string): string | null => {
   const manifest = audioManifest as Record<string, ManifestEntry>;
+  const normalizedInput = normalizeText(text);
 
   // Search through manifest for matching text
   for (const key of Object.keys(manifest)) {
-    if (manifest[key].text === text) {
+    const normalizedManifest = normalizeText(manifest[key].text);
+    if (normalizedManifest === normalizedInput) {
+      console.log(`[Narration] Found audio match: ${manifest[key].id}`);
       return manifest[key].file;
     }
   }
 
+  // Log if no match found for debugging
+  console.warn(`[Narration] No audio match for: "${text.substring(0, 50)}..."`);
   return null;
 };
 
@@ -189,11 +204,11 @@ export const NarrationControls: React.FC<{ className?: string }> = ({ className 
   const { isPlaying, currentText, audioEnabled, toggleAudio } = useNarrationStore();
 
   return (
-    <div className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-50 ${className}`}>
-      {/* Subtitle display */}
-      {currentText && (
-        <div className="mb-4 max-w-2xl mx-auto px-6 py-3 bg-surface/90 backdrop-blur-lg rounded-2xl border border-white/10">
-          <p className="text-white/80 text-center text-sm md:text-base leading-relaxed">
+    <div className={`fixed bottom-28 left-1/2 -translate-x-1/2 z-40 pointer-events-none ${className}`}>
+      {/* Subtitle display - only show when there's text and audio is enabled */}
+      {currentText && audioEnabled && (
+        <div className="mb-4 max-w-2xl mx-auto px-6 py-3 bg-surface/95 backdrop-blur-lg rounded-2xl border border-white/10 shadow-xl">
+          <p className="text-white/90 text-center text-sm md:text-base leading-relaxed">
             {currentText}
           </p>
         </div>
